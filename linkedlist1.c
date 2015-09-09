@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>	
 
 struct linkedl{
 	int value;
@@ -52,7 +53,42 @@ void printList(struct linkedl *node)
 
 // find length of a linkedlist
 
-int linked_length()
+int linked_length(struct linkedl *head){
+	int length = 1;
+	while (head->next != NULL){
+		head = head->next;
+		length = length + 1;
+	}
+	printf("%d", length);
+	return length;
+}
+
+// searches the linked list with a particular key and if it is present then return true otherwise false
+
+bool linked_search(struct linkedl *head, int key){
+	struct linkedl* node = head;
+	while (node->next != NULL){
+		if (node->value == key){
+			node = node->next;
+			printf("true");
+			return true;
+		}
+	printf("false");
+	return false;
+	}
+}
+
+// return the value of the nth node of the linked list
+
+int linked_nth(struct linkedl* head, int index){
+	struct linkedl *node = head;
+	while(index != 1){
+		head = head->next;
+		index = index - 1;
+	}
+	printf("%d",  head->value);
+	return head->value;
+}
 
 int main()
 {
@@ -64,6 +100,8 @@ int main()
   add_middle(head->next, 8);
   printf("\n Created Linked list is: ");
   printList(head);
-  getchar();
+  linked_length(head);
+  linked_search(head, 10);
+  linked_nth(head, 3);
   return 0;
 }
