@@ -6,7 +6,7 @@ struct stack_node{
 	struct stack_node *next;
 };
 
-// there is no need for this function but similar to adding a node to the linked list user can use this function
+// similar to adding a node to the linked list user can use this function
 
 struct stack_node *new_node(int data){
 	struct stack_node *stacknode = (struct stack_node*)malloc(sizeof(struct stack_node));
@@ -17,21 +17,23 @@ struct stack_node *new_node(int data){
 
 // add node to the stack similar to adding node in front of a linked list
 
-void push(struct stack_node* *_stack, int data){
-	struct stack_node *_new = (struct stack_node*)malloc(sizeof(struct stack_node));
-	struct stack_node *_head = *_stack;
+void push(struct stack_node** _stack, int data){
+	struct stack_node *_new = new_node(data);
 	_new->value = data;
-	_new->next = _head;
-	_head = _new;
+	_new->next = *_stack;
+	*_stack = _new;
+	printf("pushed element %d\n", data
+		);
 }
 
 // poping from a stack is similar to deleting the first element of a linked list
 
-void pop(struct stack_node* *_stack){
-	struct stack_node *head = *_stack;
+void pop(struct stack_node** _stack){
+	struct stack_node *head = *_stack;	
 	struct stack_node *Next = head->next;
+	printf("popped %d\n", head->value);
 	free(head);
-	head = Next;
+	*_stack = Next;
 }
 
 int isEmpty(struct stack_node *_stack){
@@ -56,8 +58,10 @@ int main(){
     push(&root, 10);
     push(&root, 20);
     push(&root, 30);
- 
-    // printf("%d popped from stack\n", pop(&root));
+    push(&root, 40);
+ 	pop(&root);
+ 	pop(&root);
+ 	pop(&root);
  
 	return 0;
 }
