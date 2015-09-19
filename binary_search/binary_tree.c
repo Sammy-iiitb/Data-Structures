@@ -7,6 +7,40 @@ struct binary {
 	struct binary *right;
 };
 
+// structure for stack
+
+struct stack {
+	int size;
+	int top;
+	struct binary* *array;
+};
+
+// add a stack of given size
+
+struct stack* create_Stack(int size){
+	struct stack* _stack = (struct stack*)malloc(sizeof(struct stack));
+	_stack->size = size;
+	_stack->top = -1;
+	_stack->array = (struct binary**)malloc(_stack->size * sizeof(struct binary*));
+	return stack;
+}
+
+// stack operations
+
+int isFull(struct stack* _stack){
+	if (_stack->top-1 == _stack->size){
+		return 1;
+	}
+}
+
+int isEmpty(struct stack* _stack){
+	if (_stack->top == -1){
+		return 1;
+	}
+}
+
+void push(struct stack *_stack){
+}
 // add a node in the binary tree
 
 struct binary *new_node(int data){
@@ -42,6 +76,34 @@ void binary_postorder(struct binary *node){
 	binary_postorder(node->left);
 	binary_postorder(node->right);
 	printf("%d ",node->value);
+}
+
+// left most node of binary tree
+
+struct binary *last_node(struct binary *node){
+	if (node == NULL){
+		return NULL;
+	}
+	while (node->left != NULL){
+		node = node->left;
+	}
+	return node;
+}
+
+// calculate size of a tree 
+
+int binary_size(struct binary *node){
+	if (node == NULL) return 0;
+	int a;
+	binary_size(node->left);
+	a = node->value;
+	binary_size(node->right);
+}
+
+// inorder tree traversal without recursion
+
+void inorder_stack(struct binary *root){
+	struct stack *s1 = 
 }
 
 int main()
